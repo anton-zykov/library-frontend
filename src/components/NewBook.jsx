@@ -17,7 +17,6 @@ const NewBook = () => {
     event.preventDefault();
 
     createBook({ variables: { title, author, published, genres } });
-    console.log('add book...');
 
     setTitle('');
     setPublished('');

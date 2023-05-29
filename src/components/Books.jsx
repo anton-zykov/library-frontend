@@ -1,7 +1,21 @@
 import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+
+const ALL_BOOKS = gql`
+  query {
+    allBooks {
+      title
+      published
+      author
+    }
+  }
+`;
 
 const Books = () => {
-  const books = [];
+  const books = useQuery(ALL_BOOKS);
+  if (books.loading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <div>
@@ -10,11 +24,11 @@ const Books = () => {
       <table>
         <tbody>
           <tr>
-            <th>a</th>
+            <th>title</th>
             <th>author</th>
             <th>published</th>
           </tr>
-          {books.map((a) => (
+          {books.data.allBooks.map((a) => (
             <tr key={a.title}>
               <td>{a.title}</td>
               <td>{a.author}</td>

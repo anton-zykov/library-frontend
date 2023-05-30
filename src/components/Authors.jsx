@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { ALL_AUTHORS, EDIT_AUTHOR } from '../queries';
+import Select from 'react-select';
 
 const Authors = () => {
   const [name, setName] = React.useState('');
@@ -49,10 +50,11 @@ const Authors = () => {
       <form onSubmit={handleBirthYearChange}>
         <div>
           name
-          <input
-            type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+          <Select
+            options={authors.data.allAuthors.map((a) => (
+              { value: a.name, label: a.name }
+            ))}
+            onChange={(event) => setName(event.value)}
           />
         </div>
         <div>
